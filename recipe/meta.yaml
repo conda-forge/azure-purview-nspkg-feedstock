@@ -6,20 +6,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/azure-purview-nspkg-{{ version }}.zip
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/azure-purview-nspkg-{{ version }}.zip
   sha256: 1a3d9ff1ee481cab9d2ac96616b1370a6665175d86f22a298dd91fa8472e0199
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install --no-deps --ignore-installed .
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - azure-nspkg >=2.0.0
 
 test:
@@ -29,6 +29,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/Azure/azure-sdk-for-python
